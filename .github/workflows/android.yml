@@ -34,6 +34,10 @@ jobs:
           appium driver install uiautomator2
           chmod +x ./android/gradlew
           sed 's,http://localhost:7071/v1.0,https://tekvlicenseserverpocfunction.azurewebsites.net/v1.0,g' src/environments/environment.ts > changed.ts && mv changed.ts src/environments/environment.ts
+          
+      - name: Debug on failure
+        if: success() || failure()
+        uses: mxschmitt/action-tmate@v3
 
       - name: Run tests
         uses: reactivecircus/android-emulator-runner@v2
@@ -53,10 +57,6 @@ jobs:
           script: |
             ionic capacitor run android --no-sync --target Pixel
             mvn test -PandroidTests -f ../tests/pom.xml -DdeviceUDID="emulator-5554" -q
-      
-      # - name: Debug on failure
-      #   if: success() || failure()
-      #   uses: mxschmitt/action-tmate@v3
 
       - name: Archive test results
         uses: actions/upload-artifact@v3
