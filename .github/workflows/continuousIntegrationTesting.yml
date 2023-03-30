@@ -35,7 +35,7 @@ jobs:
           appium driver install uiautomator2
           chmod +x ./android/gradlew
           sed 's,http://localhost:7071/v1.0,https://tekvlicenseserverpocfunction.azurewebsites.net/v1.0,g' src/environments/environment.ts > changed.ts && mv changed.ts src/environments/environment.ts
-          appium &
+          sed 's,5.0),4.8.2),g' $HOME/.m2/repository/io/appium/java-client/8.3.0/java-client-8.3.0.pom > changed.pom && mv changed.pom $HOME/.m2/repository/io/appium/java-client/8.3.0/java-client-8.3.0.pom
           
       - name: Run tests
         uses: reactivecircus/android-emulator-runner@v2
@@ -82,7 +82,7 @@ jobs:
           npm install -g appium@next
           appium driver install xcuitest
           sed 's,http://localhost:7071/v1.0,https://tekvlicenseserverpocfunction.azurewebsites.net/v1.0,g' src/environments/environment.ts > changed.ts && mv changed.ts src/environments/environment.ts
-          appium &
+          sed 's,5.0),4.8.2),g' $HOME/.m2/repository/io/appium/java-client/8.3.0/java-client-8.3.0.pom > changed.pom && mv changed.pom $HOME/.m2/repository/io/appium/java-client/8.3.0/java-client-8.3.0.pom
 
       - name: emulators list
         run: ionic cap run ios --list
