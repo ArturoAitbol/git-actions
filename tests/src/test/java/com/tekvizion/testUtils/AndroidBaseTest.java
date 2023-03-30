@@ -41,7 +41,7 @@ public class AndroidBaseTest extends AppiumUtils {
         String port = properties.getProperty("port");
         if (service == null){
             System.out.println("Starting Appium Server!!!");
-//            service = startAppiumServer(ipAddress, Integer.parseInt(port));
+            service = startAppiumServer(ipAddress, Integer.parseInt(port));
         }
     }
     @AfterClass
